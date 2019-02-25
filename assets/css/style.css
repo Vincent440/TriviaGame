@@ -1,0 +1,17 @@
+h1 {
+    font-size: 40px;
+    color:red;
+    background-color: goldenrod;
+}
+body {
+    background-image: url("../images/earth_moon.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+  }
+.container {
+    background-color: grey;
+
+}
+/*on hover event for answer class that shows which question is about to be clicked*/
