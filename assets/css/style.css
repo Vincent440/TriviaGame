@@ -14,4 +14,6 @@ body {
     background-color: grey;
 
 }
-/*on hover event for answer class that shows which question is about to be clicked*/
+li:hover {/*on hover event for answer class that shows which question is about to be clicked*/
+    background-color: aquamarine;
+}
