@@ -17,6 +17,7 @@ body {
 .container {
   background-color: darkgrey;
   opacity: 0.9;
+  padding:0% 0% 10% 0% ;
 }
 .myQuestions {
     font-size: 28px;

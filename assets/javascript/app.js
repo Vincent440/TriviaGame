@@ -1,5 +1,6 @@
 /*eslint-env browser*/
 /*global $*/
+
 //-------------------------Start of Space Trivia Game Javascript----------------------------
 //Link to live file https://vincent440.github.io/TriviaGame/
 //------------------------------GLOBAL VARIABLE DECLARATION---------------------------------
@@ -122,15 +123,15 @@ function callToPlaceQuestionOnPage() {
   ) {
     var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questionthats in the index of array
     var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??question?? text
-    var questionDivs = $("<div>"); //builds div and places ???question?? inside
+    var questionHeaders = $("<h3>"); //builds div and places ???question?? inside
     
 
 
     var choices = myCurrentQuestion.choices;
-    questionDivs.attr("class","myQuestions");
-    $("#gamebox").append(questionDivs);
+    questionHeaders.attr("class","myQuestions");
+    $("#gamebox").append(questionHeaders);
 
-    $(questionDivs).html(questiontext);
+    $(questionHeaders).html(questiontext);
     
     console.log(questiontext);
     for (
@@ -152,18 +153,12 @@ function callToPlaceQuestionOnPage() {
       
       var createLabels = $("<label>"+choiceOptions+"</label>")
       createLabels.attr("for",choiceOptions);
-      createLabels.attr("class","myAnswerRadios");
+      createLabels.attr("class","myAnswerRadios");//radio and input labels
       $("#gamebox").append(createLabels);
 
       $("#gamebox").append(createRadio);
 
       $("#gamebox").append("<br>");
-
-      //need input to place answer choices into
-      //instead of divs
-      //must only allow One answer to be selected
-      //need to build radio inputs with the same name attribute for the current array index of answers
-      //must only allow one answer to be input
     }
   }
 }
@@ -171,15 +166,18 @@ function callToPlaceQuestionOnPage() {
 function gameOverHideGameBox() {
   //function to hide questions and answers before results show on screen
   $("#gamebox").hide();
+  $("#resultbox").show();
 }
 
 function endGameGenerateResults() {
   //function to be called from end button or end timer
   //conditional statement to check answers(correctAnswer == choice) and store them in the variables
   clearInterval(counter); //CLEAR TIMER
+  
+
   $("#endGameBtn").hide(); //hides the button before displaying results page
-  $("#timer").html("Game over!");
-  $("#resultbox").text("I haven't actually gotten this far yet :( I bet you did good though!")
+  $("#timerBox").html("Game over!");
+  $("#userMessage").text("I haven't actually gotten this far yet :( I bet you did good though!")
   gameOverHideGameBox(); //hides questions and answers after storing results
   //Inside of this function I will need to call on a function to determine the results
   //then push those results into the HTML
@@ -205,6 +203,9 @@ $(document).ready(function() {
     $("#startBtn").hide();
     console.log("button hidden");
     $("#endGameBtn").show();
+    $("#resultbox").removeAttr("style","visibility");
+    $("#resultbox").hide();
+
     //On start click Call function to display questions and answers
     callToPlaceQuestionOnPage();
   });
