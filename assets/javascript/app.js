@@ -13,60 +13,60 @@ var questionsObject = [
     question: "Who was the first human to enter space?",
     correctAnswer: 1,
     choices: [
-      "Wrong Answer One!",
-      "Correct Answer!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "Neil Armstrong",
+      "Yuri Alekseyevich Gagarin ",//(CORRECT)
+      "Buzz Aldrin",
+      "Alan Shepard"
     ]
   },
   {
     question: "What was the first animal to be launched into space?",
     correctAnswer: 0,
     choices: [
-      "Correct Answer!",
-      "Wrong Answer One!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "A Rhesus monkey",//(CORRECT)
+      "A Dog",
+      "A Chimpanzee",
+      "A Cat"
     ]
   },
   {
     question: "Who was the first man on the moon?",
     correctAnswer: 1,
     choices: [
-      "Wrong Answer One!",
-      "Correct Answer!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "Buzz Alrin",
+      "Neil Armstrong",//(CORRECT)
+      "John Glenn",
+      "Alan Shepard"
     ]
   },
   {
     question: "First American Astronaut to enter orbit?",
     correctAnswer: 0,
     choices: [
-      "Correct Answer!",
-      "Wrong Answer One!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "John Glenn",//CORRECT
+      "Neil Armstrong",
+      "Alan Shepard",
+      "Buzz Aldrin"
     ]
   },
   {
     question: "What is the most expensive US Space program mission?",
     correctAnswer: 2,
     choices: [
-      "Wrong Answer Two!",
-      "Wrong Answer One!",
-      "Correct Answer!",
-      "Wrong Answer Three!"
+      "SLS and Orion",
+      "International Space Station",
+      "Space Shuttle Program",//CORRECT
+      "Apollo Space Program"
     ]
   },
   {
     question: "How many Spacecraft have left the Solar System?",
     correctAnswer: 0,
     choices: [
-      "Correct Answer!",
-      "Wrong Answer One!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "2",//CORRECT
+      "1",
+      "3",
+      "4"
     ]
   },
   {
@@ -74,20 +74,20 @@ var questionsObject = [
 
     correctAnswer: 1,
     choices: [
-      "Wrong Answer One!",
-      "Correct Answer!",
-      "Wrong Answer Two!",
-      "Wrong Answer Three!"
+      "1959",
+      "1962",//CORRECT
+      "1963",
+      "1961"
     ]
   },
   {
     question: "What was the First Satellite in Orbit of the Earth?",
     correctAnswer: 3,
     choices: [
-      "Wrong Answer Three!",
-      "Wrong Answer One!",
-      "Wrong Answer Two!",
-      "Correct Answer!"
+      "Soyuz",
+      "Mir",
+      "Explorer 1",
+      "Sputnik I"//CORRECT
     ]
   }
 ];
@@ -109,27 +109,36 @@ function myTimer() {
       endGameGenerateResults();
       return;
     }
-    console.log(count + " Seconds");
+   // console.log(count + " Seconds");
     $("#timer").html(count + " Seconds ");
   }
 }
 //function to display questions and answers to screen after start button clicked
- function questionPlacement() {
+ function callToPlaceQuestionOnPage() {
 
-   for (var questionIndex = 0 ; questionIndex < questionsObject.length ; questionIndex++ ) {
+   for (var myCurrentQuestionIndex = 0 ; myCurrentQuestionIndex < questionsObject.length ; myCurrentQuestionIndex++ ) {
 
-    var question = questionsObject[questionIndex];//sets question to the question in the index of array
-    var questiontext = question.question;//gives me a handle on the individual question text
-    var questionDivs = $("<div>"+questiontext+"</div>");//builds div and places question inside
-    var choices = question.choices;
+    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex];//Places handle to current Questionthats in the index of array
+    var questiontext = myCurrentQuestion.question;//gives me a handle on the individual ??question?? text
+    var questionDivs = $("<div>"+questiontext+"</div>");//builds div and places ???question?? inside
+    var choices = myCurrentQuestion.choices;
     $("#gamebox").append(questionDivs);
-  
-    for (let choiceIndex = 0 ; choiceIndex < choices.length; choiceIndex++ ){
+  console.log(questiontext)
+    for (let theCurrentChoiceIndex = 0 ; theCurrentChoiceIndex < choices.length; theCurrentChoiceIndex++ ){
 
-      var choice = choices[choiceIndex];//handle to grab the specific answer
+      var choiceOptions = choices[theCurrentChoiceIndex];//handle to grab the specific answer
+      console.log(choiceOptions);
+
+      console.log(theCurrentChoiceIndex);
+      var createDiv = $('<div>');
+      createDiv.text(choiceOptions);
+      $("#gamebox").append(createDiv);
+      
+
       //need input to place answer choices into 
       //must only allow One answer to be selected
-      
+      //need to build radio inputs with the same name attribute for the current array index of answers
+      //must only allow one answer to be input
     }
   }
  }
@@ -171,13 +180,15 @@ $(document).ready(function() {
     console.log("button hidden");
     $("#endGameBtn").show();
     //On start click Call function to display questions and answers 
-    questionPlacement();
+    callToPlaceQuestionOnPage();
   });
 
   $("#endGameBtn").on("click", function() {
     console.log("End button clicked");
     console.log("button hidden");
-    //call function to hide Questions & Answers & Display results
+    //call function to hide Questions
+    //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question. 
+
     endGameGenerateResults();
   });
 });
