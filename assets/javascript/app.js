@@ -5,8 +5,9 @@
 //------------------------------GLOBAL VARIABLE DECLARATION---------------------------------
 var correctAnswer, //-answersCorrect
   wrongAnswer, //-answersWrong
-  noAnswer = 8; //-answersNotChecked
-//a Question array , with an Object for each question with answer arrays.
+  noAnswer = 8, //-answersNotChecked
+  counter,
+  count;//a Question array , with an Object for each question with answer arrays.
 var questionsObject = [
   {
     question: "Who was the first human to enter space?",
@@ -92,11 +93,11 @@ var questionsObject = [
 ];
 //----------------------------------Function creation--------------------------------------
 //start timer function -connected to start button- that begins a timer to countdown hides button on click
-var counter;// started counter variable in global scope to control my timer outside of the function. 
+// started counter variable in global scope to control my timer outside of the function. 
 
 function myTimer() {
   console.log("timer started");
-  var count = 30;
+  count = 30;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
   function timer() {
     count = count - 1;
