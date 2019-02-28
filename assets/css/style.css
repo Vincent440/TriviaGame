@@ -1,19 +1,30 @@
 #gameTitle {
-    font-size: 40px;
-    color:red;
-    background-color: goldenrod;
+  font-size: 40px;
+  color: red;
+  background-color: blue;
 }
 body {
-    background-image: url("../images/earth_moon.jpg");
-    background-repeat: no-repeat;
-    background-attachment: inherit;
-    background-position: center; 
-    background-size: cover;
-  }
-.container {
-    background-color: grey;
-
+  background-image: url("../images/earth_moon.jpg");
+  background-repeat: no-repeat;
+  background-attachment: inherit;
+  background-position: center;
+  background-size: cover;
 }
-li:hover {/*on hover event for answer class that shows which question is about to be clicked*/
-    background-color: aquamarine;
+#timer {
+    font-size: 30px;
+    color:white;
+}
+.container {
+  background-color: darkgrey;
+  opacity: 0.9;
+}
+.myQuestions {
+    font-size: 28px;
+}
+.myAnswerRadios {
+  padding: 5px;
+  opacity: 1;
+}
+.myAnswerRadios:hover {
+  color: white;
 }

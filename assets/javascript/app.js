@@ -7,14 +7,14 @@ var correctAnswer, //-answersCorrect
   wrongAnswer, //-answersWrong
   noAnswer = 8, //-answersNotChecked
   counter,
-  count;//a Question array , with an Object for each question with answer arrays.
+  count; //a Question array , with Objects for each question with answer arrays.
 var questionsObject = [
   {
     question: "Who was the first human to enter space?",
     correctAnswer: 1,
     choices: [
       "Neil Armstrong",
-      "Yuri Alekseyevich Gagarin ",//(CORRECT)
+      "Yuri Alekseyevich Gagarin ", //(CORRECT)
       "Buzz Aldrin",
       "Alan Shepard"
     ]
@@ -23,7 +23,7 @@ var questionsObject = [
     question: "What was the first animal to be launched into space?",
     correctAnswer: 0,
     choices: [
-      "A Rhesus monkey",//(CORRECT)
+      "A Rhesus monkey", //(CORRECT)
       "A Dog",
       "A Chimpanzee",
       "A Cat"
@@ -34,7 +34,7 @@ var questionsObject = [
     correctAnswer: 1,
     choices: [
       "Buzz Alrin",
-      "Neil Armstrong",//(CORRECT)
+      "Neil Armstrong", //(CORRECT)
       "John Glenn",
       "Alan Shepard"
     ]
@@ -43,7 +43,7 @@ var questionsObject = [
     question: "First American Astronaut to enter orbit?",
     correctAnswer: 0,
     choices: [
-      "John Glenn",//CORRECT
+      "John Glenn", //CORRECT
       "Neil Armstrong",
       "Alan Shepard",
       "Buzz Aldrin"
@@ -55,7 +55,7 @@ var questionsObject = [
     choices: [
       "SLS and Orion",
       "International Space Station",
-      "Space Shuttle Program",//CORRECT
+      "Space Shuttle Program", //CORRECT
       "Apollo Space Program"
     ]
   },
@@ -63,7 +63,7 @@ var questionsObject = [
     question: "How many Spacecraft have left the Solar System?",
     correctAnswer: 0,
     choices: [
-      "2",//CORRECT
+      "2", //CORRECT
       "1",
       "3",
       "4"
@@ -75,7 +75,7 @@ var questionsObject = [
     correctAnswer: 1,
     choices: [
       "1959",
-      "1962",//CORRECT
+      "1962", //CORRECT
       "1963",
       "1961"
     ]
@@ -87,17 +87,17 @@ var questionsObject = [
       "Soyuz",
       "Mir",
       "Explorer 1",
-      "Sputnik I"//CORRECT
+      "Sputnik I" //CORRECT
     ]
   }
 ];
 //----------------------------------Function creation--------------------------------------
 //start timer function -connected to start button- that begins a timer to countdown hides button on click
-// started counter variable in global scope to control my timer outside of the function. 
+// started counter variable in global scope to control my timer outside of the function.
 
 function myTimer() {
   console.log("timer started");
-  count = 30;
+  count = 60;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
   function timer() {
     count = count - 1;
@@ -109,58 +109,80 @@ function myTimer() {
       endGameGenerateResults();
       return;
     }
-   // console.log(count + " Seconds");
+    // console.log(count + " Seconds");
     $("#timer").html(count + " Seconds ");
   }
 }
 //function to display questions and answers to screen after start button clicked
- function callToPlaceQuestionOnPage() {
+function callToPlaceQuestionOnPage() {
+  for (
+    var myCurrentQuestionIndex = 0;
+    myCurrentQuestionIndex < questionsObject.length;
+    myCurrentQuestionIndex++
+  ) {
+    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questionthats in the index of array
+    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??question?? text
+    var questionDivs = $("<div>"); //builds div and places ???question?? inside
+    
 
-   for (var myCurrentQuestionIndex = 0 ; myCurrentQuestionIndex < questionsObject.length ; myCurrentQuestionIndex++ ) {
 
-    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex];//Places handle to current Questionthats in the index of array
-    var questiontext = myCurrentQuestion.question;//gives me a handle on the individual ??question?? text
-    var questionDivs = $("<div>"+questiontext+"</div>");//builds div and places ???question?? inside
     var choices = myCurrentQuestion.choices;
+    questionDivs.attr("class","myQuestions");
     $("#gamebox").append(questionDivs);
-  console.log(questiontext)
-    for (let theCurrentChoiceIndex = 0 ; theCurrentChoiceIndex < choices.length; theCurrentChoiceIndex++ ){
 
-      var choiceOptions = choices[theCurrentChoiceIndex];//handle to grab the specific answer
+    $(questionDivs).html(questiontext);
+    
+    console.log(questiontext);
+    for (
+      let theCurrentChoiceIndex = 0;
+      theCurrentChoiceIndex < choices.length;
+      theCurrentChoiceIndex++
+    ) {
+      var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
       console.log(choiceOptions);
 
       console.log(theCurrentChoiceIndex);
-      var createRadio = $("<input type='radio'/>");
-      createRadio.attr('value',choiceOptions);
-      createRadio.attr("name",myCurrentQuestionIndex);
-     $("#gamebox").append(choiceOptions);
-      $("#gamebox").append(createRadio);
-       $("#gamebox").append("<br>");
 
-      //need input to place answer choices into 
+      var createRadio = $("<input type='radio'/>");
+
+      createRadio.attr("value", choiceOptions);
+      createRadio.attr("id",choiceOptions);
+      createRadio.attr("name", myCurrentQuestionIndex);
+
+      
+      var createLabels = $("<label>"+choiceOptions+"</label>")
+      createLabels.attr("for",choiceOptions);
+      createLabels.attr("class","myAnswerRadios");
+      $("#gamebox").append(createLabels);
+
+      $("#gamebox").append(createRadio);
+
+      $("#gamebox").append("<br>");
+
+      //need input to place answer choices into
       //instead of divs
       //must only allow One answer to be selected
       //need to build radio inputs with the same name attribute for the current array index of answers
       //must only allow one answer to be input
     }
   }
- }
+}
 
-function gameOverHideGameBox(){//function to hide questions and answers before results show on screen
+function gameOverHideGameBox() {
+  //function to hide questions and answers before results show on screen
   $("#gamebox").hide();
 }
 
-function endGameGenerateResults(){//function to be called from end button or end timer
+function endGameGenerateResults() {
+  //function to be called from end button or end timer
   //conditional statement to check answers(correctAnswer == choice) and store them in the variables
   clearInterval(counter); //CLEAR TIMER
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timer").html("Game over!");
-
-  gameOverHideGameBox();//hides questions and answers after storing results 
-  //Inside of this function I will need to call on a function to determine the results 
-  //then push those results into the HTML 
-
-
+  $("#resultbox").text("I haven't actually gotten this far yet :( I bet you did good though! ")
+  gameOverHideGameBox(); //hides questions and answers after storing results
+  //Inside of this function I will need to call on a function to determine the results
+  //then push those results into the HTML
 }
 
 //----------when timer ends-----||-------CLICK [DONE/FINISH] BUTTON.-----------
@@ -173,16 +195,17 @@ function endGameGenerateResults(){//function to be called from end button or end
 //----------------------------Document Ready--------------------------------------
 
 $(document).ready(function() {
-
   console.log("page loaded");
 
   $("#startBtn").on("click", function() {
+    $("#timer").html("START!!!");
+
     console.log("Start button clicked");
     myTimer();
     $("#startBtn").hide();
     console.log("button hidden");
     $("#endGameBtn").show();
-    //On start click Call function to display questions and answers 
+    //On start click Call function to display questions and answers
     callToPlaceQuestionOnPage();
   });
 
@@ -190,7 +213,7 @@ $(document).ready(function() {
     console.log("End button clicked");
     console.log("button hidden");
     //call function to hide Questions
-    //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question. 
+    //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question.
 
     endGameGenerateResults();
   });
