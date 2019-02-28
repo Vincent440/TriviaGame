@@ -130,10 +130,12 @@ function myTimer() {
       console.log(choiceOptions);
 
       console.log(theCurrentChoiceIndex);
-      var createlist = $('<li>');
-      createlist.text(choiceOptions);
-      $("#gamebox").append(createlist);
-      
+      var createRadio = $("<input type='radio'/>");
+      createRadio.attr('value',choiceOptions);
+      createRadio.attr("name",myCurrentQuestionIndex);
+     $("#gamebox").append(choiceOptions);
+      $("#gamebox").append(createRadio);
+       $("#gamebox").append("<br>");
 
       //need input to place answer choices into 
       //instead of divs
