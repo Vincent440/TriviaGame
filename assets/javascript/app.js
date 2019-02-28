@@ -179,7 +179,7 @@ function endGameGenerateResults() {
   clearInterval(counter); //CLEAR TIMER
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timer").html("Game over!");
-  $("#resultbox").text("I haven't actually gotten this far yet :( I bet you did good though! ")
+  $("#resultbox").text("I haven't actually gotten this far yet :( I bet you did good though!")
   gameOverHideGameBox(); //hides questions and answers after storing results
   //Inside of this function I will need to call on a function to determine the results
   //then push those results into the HTML
