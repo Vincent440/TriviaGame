@@ -103,7 +103,7 @@ function myTimer() {
   function timer() {
     count = count - 1;
     if (count <= 0) {
-      console.log("Times UP!");
+     //console.log("Times UP!");
       //CALL FUNCTION TO(to do same as finish button):
       //LOG USER ANSWERED QUESTIONS CORRECT||WRONG||NOT ANSWERED
       //DISPLAY RESULT PAGE with those variables
