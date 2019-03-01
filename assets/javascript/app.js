@@ -112,6 +112,7 @@ function myTimer() {
     }
     // console.log(count + " Seconds");
     $("#timer").html(count + " Seconds ");
+    $("#timer2").html(count + " Seconds ");
   }
 }
 //function to display questions and answers to screen after start button clicked
@@ -122,8 +123,8 @@ function callToPlaceQuestionOnPage() {
     myCurrentQuestionIndex++
   ) {
     var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questionthats in the index of array
-    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??question?? text
-    var questionHeaders = $("<h3>"); //builds div and places ???question?? inside
+    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??s
+    var questionHeaders = $("<h2>"); //builds headings for questions
     
 
 
@@ -153,7 +154,7 @@ function callToPlaceQuestionOnPage() {
       
       var createLabels = $("<label>"+choiceOptions+"</label>")
       createLabels.attr("for",choiceOptions);
-      createLabels.attr("class","myAnswerRadios");//radio and input labels
+      createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
       $("#gamebox").append(createLabels);
 
       $("#gamebox").append(createRadio);
@@ -177,6 +178,7 @@ function endGameGenerateResults() {
 
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timerBox").html("Game over!");
+  $("#bottomTimerMessage").html("");
   $("#userMessage").text("I haven't actually gotten this far yet :( I bet you did good though!")
   gameOverHideGameBox(); //hides questions and answers after storing results
   //Inside of this function I will need to call on a function to determine the results
