@@ -34,20 +34,20 @@ var questionsObject = [
     question: "Who was the first man on the moon?",
     correctAnswer: 1,
     choices: [
-      "Buzz Alrin",
-      "Neil Armstrong", //(CORRECT)
+      "Buzz Alrin ",
+      "Neil Armstrong ", //(CORRECT)
       "John Glenn",
-      "Alan Shepard"
+      "Alan Shepard "
     ]
   },
   {
     question: "First American Astronaut to enter orbit?",
     correctAnswer: 0,
     choices: [
-      "John Glenn", //CORRECT
-      "Neil Armstrong",
-      "Alan Shepard",
-      "Buzz Aldrin"
+      "John Glenn ", //CORRECT
+      " Neil Armstrong  ",
+      " Alan Shepard ",
+      " Buzz Aldrin "
     ]
   },
   {
