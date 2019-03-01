@@ -167,6 +167,13 @@ function checkAnswerRadioValues(){
     console.log(qAnswerResult5);
     console.log(qAnswerResult6);
     console.log(qAnswerResult7);
+ //attempt to Compare the answer results with the correct answer here
+
+
+
+
+
+ }
 //----------when timer ends-----|or|-------CLICK [DONE/FINISH] BUTTON.-----------
 //Inside gameResults function
 //DO A CHECK
@@ -174,7 +181,6 @@ function checkAnswerRadioValues(){
 //      how many incorrect answers
 //      how many unanswered remaining
 //Take those 3 variables and push them to the html
- }
 function gameOverHideGameBox() {//function to hide questions and answers before results show on screen
   $("#gamebox").hide();
   $("#resultbox").show();
