@@ -97,7 +97,7 @@ var questionsObject = [
 // started counter variable in global scope to control my timer outside of the function.
 
 function myTimer() {
-  console.log("timer started");
+  //console.log("timer started");
   count = 60;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
   function timer() {
@@ -126,32 +126,24 @@ function callToPlaceQuestionOnPage() {
     var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??s
     var questionHeaders = $("<h2>"); //builds headings for questions
     
-
-
     var choices = myCurrentQuestion.choices;
     questionHeaders.attr("class","myQuestions");
     $("#gamebox").append(questionHeaders);
-
     $(questionHeaders).html(questiontext);
     
-    console.log(questiontext);
+    //console.log(questiontext);
     for (
       let theCurrentChoiceIndex = 0;
       theCurrentChoiceIndex < choices.length;
       theCurrentChoiceIndex++
     ) {
       var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
-      console.log(choiceOptions);
-
-      console.log(theCurrentChoiceIndex);
-
+      //console.log(choiceOptions);
+      //console.log(theCurrentChoiceIndex);
       var createRadio = $("<input type='radio'/>");
-
       createRadio.attr("value", choiceOptions);
       createRadio.attr("id",choiceOptions);
       createRadio.attr("name", myCurrentQuestionIndex);
-
-      
       var createLabels = $("<label>"+choiceOptions+"</label>")
       createLabels.attr("for",choiceOptions);
       createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
@@ -195,15 +187,15 @@ function endGameGenerateResults() {
 //----------------------------Document Ready--------------------------------------
 
 $(document).ready(function() {
-  console.log("page loaded");
+  //console.log("page loaded");
 
   $("#startBtn").on("click", function() {
     $("#timer").html("START!!!");
 
-    console.log("Start button clicked");
+    //console.log("Start button clicked");
     myTimer();
     $("#startBtn").hide();
-    console.log("button hidden");
+    //console.log("button hidden");
     $("#endGameBtn").show();
     $("#resultbox").removeAttr("style","visibility");
     $("#resultbox").hide();
@@ -213,8 +205,8 @@ $(document).ready(function() {
   });
 
   $("#endGameBtn").on("click", function() {
-    console.log("End button clicked");
-    console.log("button hidden");
+    //console.log("End button clicked");
+    //console.log("button hidden");
     //call function to hide Questions
     //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question.
 
