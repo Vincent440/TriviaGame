@@ -1,6 +1,5 @@
 /*eslint-env browser*/
 /*global $*/
-
 //-------------------------Start of Space Trivia Game Javascript----------------------------
 //Link to live file https://vincent440.github.io/TriviaGame/
 //------------------------------GLOBAL VARIABLE DECLARATION---------------------------------
@@ -14,10 +13,10 @@ var questionsObject = [
     question: "Who was the first human to enter space?",
     correctAnswer: 1,
     choices: [
-      "Neil Armstrong",
-      "Yuri Alekseyevich Gagarin ", //(CORRECT)
-      "Buzz Aldrin",
-      "Alan Shepard"
+      "Neil Alden Armstrong",
+      "Yuri Alekseyevich Gagarin", //(CORRECT)
+      "Edwin Eugene Aldrin Jr.",
+      "Alan Barlett Shepard Jr."
     ]
   },
   {
@@ -34,20 +33,20 @@ var questionsObject = [
     question: "Who was the first man on the moon?",
     correctAnswer: 1,
     choices: [
-      "Buzz Alrin ",
-      "Neil Armstrong ", //(CORRECT)
+      "Buzz Alrin",
+      "Neil Armstrong", //(CORRECT)
       "John Glenn",
-      "Alan Shepard "
+      "Alan Shepard"
     ]
   },
   {
     question: "First American Astronaut to enter orbit?",
     correctAnswer: 0,
     choices: [
-      "John Glenn ", //CORRECT
-      " Neil Armstrong  ",
-      " Alan Shepard ",
-      " Buzz Aldrin "
+      "John Herschel Glenn Jr.", //CORRECT
+      "Neil A. Armstrong",
+      "Alan B. Shepard",
+      "Dr. Rendezvous"
     ]
   },
   {
@@ -95,7 +94,6 @@ var questionsObject = [
 //----------------------------------Function creation--------------------------------------
 //start timer function -connected to start button- that begins a timer to countdown hides button on click
 // started counter variable in global scope to control my timer outside of the function.
-
 function myTimer() {
   //console.log("timer started");
   count = 60;
@@ -122,12 +120,16 @@ function callToPlaceQuestionOnPage() {
     myCurrentQuestionIndex < questionsObject.length;
     myCurrentQuestionIndex++
   ) {
-    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questionthats in the index of array
+    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questions thats in the index of array
     var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??s
     var questionHeaders = $("<h2>"); //builds headings for questions
-    
+    let theQuestionId = "question" + myCurrentQuestionIndex;
+
+    //console.log(theQuestionId);
+
     var choices = myCurrentQuestion.choices;
     questionHeaders.attr("class","myQuestions");
+    questionHeaders.attr("id",theQuestionId);
     $("#gamebox").append(questionHeaders);
     $(questionHeaders).html(questiontext);
     
@@ -140,12 +142,14 @@ function callToPlaceQuestionOnPage() {
       var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
       //console.log(choiceOptions);
       //console.log(theCurrentChoiceIndex);
-      var createRadio = $("<input type='radio'/>");
+      var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
-      createRadio.attr("id",choiceOptions);
+      var theAnswerId = myCurrentQuestionIndex+ "ansID" +theCurrentChoiceIndex;
+      
+      createRadio.attr("id",theAnswerId);
       createRadio.attr("name", myCurrentQuestionIndex);
       var createLabels = $("<label>"+choiceOptions+"</label>")
-      createLabels.attr("for",choiceOptions);
+      createLabels.attr("for",theAnswerId);
       createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
       $("#gamebox").append(createLabels);
 
@@ -155,18 +159,34 @@ function callToPlaceQuestionOnPage() {
     }
   }
 }
+function checkAnswerRadioValues(){
+    let qAnswerResult0  = $( "input[type=radio][name=0]:checked" ).val();
+    let qAnswerResult1  = $( "input[type=radio][name=1]:checked" ).val();
+    let qAnswerResult2  = $( "input[type=radio][name=2]:checked" ).val();
+    let qAnswerResult3  = $( "input[type=radio][name=3]:checked" ).val();
+    let qAnswerResult4  = $( "input[type=radio][name=4]:checked" ).val();
+    let qAnswerResult5  = $( "input[type=radio][name=5]:checked" ).val();
+    let qAnswerResult6  = $( "input[type=radio][name=6]:checked" ).val();
+    let qAnswerResult7  = $( "input[type=radio][name=7]:checked" ).val();
 
-function gameOverHideGameBox() {
-  //function to hide questions and answers before results show on screen
+    console.log(qAnswerResult0);
+    console.log(qAnswerResult1);
+    console.log(qAnswerResult2);
+    console.log(qAnswerResult3);
+    console.log(qAnswerResult4);
+    console.log(qAnswerResult5);
+    console.log(qAnswerResult6);
+    console.log(qAnswerResult7);
+ }
+function gameOverHideGameBox() {//function to hide questions and answers before results show on screen
   $("#gamebox").hide();
   $("#resultbox").show();
 }
-
 function endGameGenerateResults() {
   //function to be called from end button or end timer
   //conditional statement to check answers(correctAnswer == choice) and store them in the variables
   clearInterval(counter); //CLEAR TIMER
-  
+  checkAnswerRadioValues();
 
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timerBox").html("Game over!");
@@ -176,7 +196,6 @@ function endGameGenerateResults() {
   //Inside of this function I will need to call on a function to determine the results
   //then push those results into the HTML
 }
-
 //----------when timer ends-----||-------CLICK [DONE/FINISH] BUTTON.-----------
 //Inside gameResults function
 //DO A CHECK
@@ -185,13 +204,10 @@ function endGameGenerateResults() {
 //      how many unanswered remaining
 //Take those 3 variables and push them to the html
 //----------------------------Document Ready--------------------------------------
-
 $(document).ready(function() {
   //console.log("page loaded");
-
   $("#startBtn").on("click", function() {
     $("#timer").html("START!!!");
-
     //console.log("Start button clicked");
     myTimer();
     $("#startBtn").hide();
@@ -203,13 +219,11 @@ $(document).ready(function() {
     //On start click Call function to display questions and answers
     callToPlaceQuestionOnPage();
   });
-
   $("#endGameBtn").on("click", function() {
     //console.log("End button clicked");
     //console.log("button hidden");
     //call function to hide Questions
     //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question.
-
     endGameGenerateResults();
   });
 });
