@@ -71,7 +71,6 @@ var questionsObject = [
   },
   {
     question: "What year did the United States Place a man into Orbit?",
-
     correctAnswer: 1,
     choices: [
       "1959",
@@ -124,16 +123,11 @@ function callToPlaceQuestionOnPage() {
     var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??s
     var questionHeaders = $("<h2>"); //builds headings for questions
     let theQuestionId = "question" + myCurrentQuestionIndex;
-
-    //console.log(theQuestionId);
-
     var choices = myCurrentQuestion.choices;
     questionHeaders.attr("class","myQuestions");
     questionHeaders.attr("id",theQuestionId);
     $("#gamebox").append(questionHeaders);
     $(questionHeaders).html(questiontext);
-    
-    //console.log(questiontext);
     for (
       let theCurrentChoiceIndex = 0;
       theCurrentChoiceIndex < choices.length;
@@ -145,16 +139,13 @@ function callToPlaceQuestionOnPage() {
       var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
       var theAnswerId = myCurrentQuestionIndex+ "ansID" +theCurrentChoiceIndex;
-      
       createRadio.attr("id",theAnswerId);
       createRadio.attr("name", myCurrentQuestionIndex);
       var createLabels = $("<label>"+choiceOptions+"</label>")
       createLabels.attr("for",theAnswerId);
       createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
       $("#gamebox").append(createLabels);
-
       $("#gamebox").append(createRadio);
-
       $("#gamebox").append("<br>");
     }
   }
@@ -168,15 +159,21 @@ function checkAnswerRadioValues(){
     let qAnswerResult5  = $( "input[type=radio][name=5]:checked" ).val();
     let qAnswerResult6  = $( "input[type=radio][name=6]:checked" ).val();
     let qAnswerResult7  = $( "input[type=radio][name=7]:checked" ).val();
-
-    console.log(qAnswerResult0);
-    console.log(qAnswerResult1);
+    console.log(qAnswerResult0);//got a handle on the user input, now just to build conditional statement
+    console.log(qAnswerResult1);//if statement needs to compare input selected vs correct answer index or string
     console.log(qAnswerResult2);
     console.log(qAnswerResult3);
     console.log(qAnswerResult4);
     console.log(qAnswerResult5);
     console.log(qAnswerResult6);
     console.log(qAnswerResult7);
+//----------when timer ends-----|or|-------CLICK [DONE/FINISH] BUTTON.-----------
+//Inside gameResults function
+//DO A CHECK
+//      how many correct answers
+//      how many incorrect answers
+//      how many unanswered remaining
+//Take those 3 variables and push them to the html
  }
 function gameOverHideGameBox() {//function to hide questions and answers before results show on screen
   $("#gamebox").hide();
@@ -187,7 +184,6 @@ function endGameGenerateResults() {
   //conditional statement to check answers(correctAnswer == choice) and store them in the variables
   clearInterval(counter); //CLEAR TIMER
   checkAnswerRadioValues();
-
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timerBox").html("Game over!");
   $("#bottomTimerMessage").html("");
@@ -196,32 +192,18 @@ function endGameGenerateResults() {
   //Inside of this function I will need to call on a function to determine the results
   //then push those results into the HTML
 }
-//----------when timer ends-----||-------CLICK [DONE/FINISH] BUTTON.-----------
-//Inside gameResults function
-//DO A CHECK
-//      how many correct answers
-//      how many incorrect answers
-//      how many unanswered remaining
-//Take those 3 variables and push them to the html
 //----------------------------Document Ready--------------------------------------
 $(document).ready(function() {
-  //console.log("page loaded");
   $("#startBtn").on("click", function() {
     $("#timer").html("START!!!");
-    //console.log("Start button clicked");
     myTimer();
     $("#startBtn").hide();
-    //console.log("button hidden");
     $("#endGameBtn").show();
     $("#resultbox").removeAttr("style","visibility");
     $("#resultbox").hide();
-
-    //On start click Call function to display questions and answers
-    callToPlaceQuestionOnPage();
+    callToPlaceQuestionOnPage();//On start button click Call function to display questions and answers
   });
   $("#endGameBtn").on("click", function() {
-    //console.log("End button clicked");
-    //console.log("button hidden");
     //call function to hide Questions
     //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question.
     endGameGenerateResults();
