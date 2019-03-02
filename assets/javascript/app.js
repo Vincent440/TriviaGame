@@ -243,7 +243,7 @@ function endGameGenerateResults() {
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timerBox").html("Game over!");
   $("#bottomTimerMessage").html("");
-  $("#userMessage").text("Check above for you results!")
+  $("#userMessage").text("Check above for the results!")
   gameOverHideGameBox(); //hides questions and answers after storing results
 }
 //----------------------------Document Ready--------------------------------------
