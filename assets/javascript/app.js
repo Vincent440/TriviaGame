@@ -3,15 +3,15 @@
 //-------------------------Start of Space Trivia Game Javascript----------------------------
 //Link to live file https://vincent440.github.io/TriviaGame/
 //------------------------------GLOBAL VARIABLE DECLARATION---------------------------------
-var correctAnswer, //-answersCorrect
-  wrongAnswer, //-answersWrong
-  noAnswer = 8, //-answersNotChecked
+var userCorrectPicks=0, //-answersCorrect
+  userWrongAnswer=0, //-answersWrong
+  noAnswer = 0, //-answersNotChecked
   counter,
   count; //a Question array , with Objects for each question with answer arrays.
 var questionsObject = [
   {
     question: "Who was the first human to enter space?",
-    correctAnswer: 1,
+    correctAnswer:"Yuri Alekseyevich Gagarin",
     choices: [
       "Neil Alden Armstrong",
       "Yuri Alekseyevich Gagarin", //(CORRECT)
@@ -21,7 +21,7 @@ var questionsObject = [
   },
   {
     question: "What was the first animal to be launched into space?",
-    correctAnswer: 0,
+    correctAnswer: "A Rhesus monkey",
     choices: [
       "A Rhesus monkey", //(CORRECT)
       "A Dog",
@@ -31,7 +31,7 @@ var questionsObject = [
   },
   {
     question: "Who was the first man on the moon?",
-    correctAnswer: 1,
+    correctAnswer: "Neil Armstrong",
     choices: [
       "Buzz Alrin",
       "Neil Armstrong", //(CORRECT)
@@ -41,7 +41,7 @@ var questionsObject = [
   },
   {
     question: "First American Astronaut to enter orbit?",
-    correctAnswer: 0,
+    correctAnswer: "John Herschel Glenn Jr.",
     choices: [
       "John Herschel Glenn Jr.", //CORRECT
       "Neil A. Armstrong",
@@ -51,7 +51,7 @@ var questionsObject = [
   },
   {
     question: "What is the most expensive US Space program mission?",
-    correctAnswer: 2,
+    correctAnswer: "Space Shuttle Program",
     choices: [
       "SLS and Orion",
       "International Space Station",
@@ -61,7 +61,7 @@ var questionsObject = [
   },
   {
     question: "How many Spacecraft have left the Solar System?",
-    correctAnswer: 0,
+    correctAnswer: "2",
     choices: [
       "2", //CORRECT
       "1",
@@ -71,7 +71,7 @@ var questionsObject = [
   },
   {
     question: "What year did the United States Place a man into Orbit?",
-    correctAnswer: 1,
+    correctAnswer: "1962",
     choices: [
       "1959",
       "1962", //CORRECT
@@ -81,7 +81,7 @@ var questionsObject = [
   },
   {
     question: "What was the First Satellite in Orbit of the Earth?",
-    correctAnswer: 3,
+    correctAnswer: "Sputnik I",
     choices: [
       "Soyuz",
       "Mir",
@@ -91,29 +91,20 @@ var questionsObject = [
   }
 ];
 //----------------------------------Function creation--------------------------------------
-//start timer function -connected to start button- that begins a timer to countdown hides button on click
-// started counter variable in global scope to control my timer outside of the function.
 function myTimer() {
-  //console.log("timer started");
   count = 60;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
   function timer() {
     count = count - 1;
     if (count <= 0) {
-     //console.log("Times UP!");
-      //CALL FUNCTION TO(to do same as finish button):
-      //LOG USER ANSWERED QUESTIONS CORRECT||WRONG||NOT ANSWERED
-      //DISPLAY RESULT PAGE with those variables
       endGameGenerateResults();
       return;
     }
-    // console.log(count + " Seconds");
     $("#timer").html(count + " Seconds ");
     $("#timer2").html(count + " Seconds ");
   }
 }
-//function to display questions and answers to screen after start button clicked
-function callToPlaceQuestionOnPage() {
+function callToPlaceQuestionOnPage() {//function to display questions and answers to screen after start button clicked
   for (
     var myCurrentQuestionIndex = 0;
     myCurrentQuestionIndex < questionsObject.length;
@@ -134,14 +125,12 @@ function callToPlaceQuestionOnPage() {
       theCurrentChoiceIndex++
     ) {
       var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
-      //console.log(choiceOptions);
-      //console.log(theCurrentChoiceIndex);
       var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
       var theAnswerId = myCurrentQuestionIndex+ "ansID" +theCurrentChoiceIndex;
       createRadio.attr("id",theAnswerId);
       createRadio.attr("name", myCurrentQuestionIndex);
-      var createLabels = $("<label>"+choiceOptions+"</label>")
+      var createLabels = $("<label>"+choiceOptions+"</label>");
       createLabels.attr("for",theAnswerId);
       createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
       $("#gamebox").append(createLabels);
@@ -151,6 +140,14 @@ function callToPlaceQuestionOnPage() {
   }
 }
 function checkAnswerRadioValues(){
+    let correctResult0 = questionsObject[0].correctAnswer;
+    let correctResult1 = questionsObject[1].correctAnswer;
+    let correctResult2 = questionsObject[2].correctAnswer;
+    let correctResult3 = questionsObject[3].correctAnswer;
+    let correctResult4 = questionsObject[4].correctAnswer;
+    let correctResult5 = questionsObject[5].correctAnswer;
+    let correctResult6 = questionsObject[6].correctAnswer;
+    let correctResult7 = questionsObject[7].correctAnswer;
     let qAnswerResult0  = $( "input[type=radio][name=0]:checked" ).val();
     let qAnswerResult1  = $( "input[type=radio][name=1]:checked" ).val();
     let qAnswerResult2  = $( "input[type=radio][name=2]:checked" ).val();
@@ -159,44 +156,95 @@ function checkAnswerRadioValues(){
     let qAnswerResult5  = $( "input[type=radio][name=5]:checked" ).val();
     let qAnswerResult6  = $( "input[type=radio][name=6]:checked" ).val();
     let qAnswerResult7  = $( "input[type=radio][name=7]:checked" ).val();
-    console.log(qAnswerResult0);//got a handle on the user input, now just to build conditional statement
-    console.log(qAnswerResult1);//if statement needs to compare input selected vs correct answer index or string
-    console.log(qAnswerResult2);
-    console.log(qAnswerResult3);
-    console.log(qAnswerResult4);
-    console.log(qAnswerResult5);
-    console.log(qAnswerResult6);
-    console.log(qAnswerResult7);
- //attempt to Compare the answer results with the correct answer here
-
-
-
-
-
+    //clearly could of done this alot neater but if it works it works ¯\_(ツ)_/¯ Sorry guys :D 
+    if ( qAnswerResult0 === correctResult0 ){
+        userCorrectPicks=1;
+    }
+    else if (qAnswerResult0==undefined){
+        noAnswer=1;
+    }
+    else{
+        userWrongAnswer=1;
+    }
+    if ( qAnswerResult1 === correctResult1 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult1==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult2 === correctResult2 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult2==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult3 === correctResult3 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult3==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult4 === correctResult4 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult4==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult5 === correctResult5 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult5==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult6 === correctResult6 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult6==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    if ( qAnswerResult7 === correctResult7 ){
+        userCorrectPicks++;
+    }
+    else if(qAnswerResult7==undefined){
+        noAnswer++;
+    }
+    else{
+        userWrongAnswer++;
+    }
+    $("#correctAnswered").text(userCorrectPicks);
+    $("#wrongAnswered").text(userWrongAnswer);
+    $("#notAnswered").text(noAnswer);
  }
-//----------when timer ends-----|or|-------CLICK [DONE/FINISH] BUTTON.-----------
-//Inside gameResults function
-//DO A CHECK
-//      how many correct answers
-//      how many incorrect answers
-//      how many unanswered remaining
-//Take those 3 variables and push them to the html
 function gameOverHideGameBox() {//function to hide questions and answers before results show on screen
   $("#gamebox").hide();
   $("#resultbox").show();
 }
 function endGameGenerateResults() {
-  //function to be called from end button or end timer
-  //conditional statement to check answers(correctAnswer == choice) and store them in the variables
   clearInterval(counter); //CLEAR TIMER
   checkAnswerRadioValues();
   $("#endGameBtn").hide(); //hides the button before displaying results page
   $("#timerBox").html("Game over!");
   $("#bottomTimerMessage").html("");
-  $("#userMessage").text("I haven't actually gotten this far yet :( I bet you did good though!")
+  $("#userMessage").text("Check above for you results!")
   gameOverHideGameBox(); //hides questions and answers after storing results
-  //Inside of this function I will need to call on a function to determine the results
-  //then push those results into the HTML
 }
 //----------------------------Document Ready--------------------------------------
 $(document).ready(function() {
@@ -210,8 +258,6 @@ $(document).ready(function() {
     callToPlaceQuestionOnPage();//On start button click Call function to display questions and answers
   });
   $("#endGameBtn").on("click", function() {
-    //call function to hide Questions
-    //will need to have this button call the function that does the same as if the timer ends. Displaying results to screen after taking in only one input for each question.
     endGameGenerateResults();
   });
 });

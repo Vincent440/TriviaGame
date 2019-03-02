@@ -28,3 +28,12 @@ body {
 .myAnswerRadios:hover {
   color: white;
 }
+#header1{
+  color:rgb(0, 216, 29);
+}
+#header2{
+  color:crimson;
+}
+#header3{
+  color:rgb(26, 26, 209);
+}
