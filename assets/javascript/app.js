@@ -92,7 +92,7 @@ var questionsObject = [
 ];
 //----------------------------------Function creation--------------------------------------
 function myTimer() {
-  count = 60;
+  count = 90;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
   function timer() {
     count = count - 1;
