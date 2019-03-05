@@ -12,85 +12,47 @@ var questionsObject = [
   {
     question: "Who was the first human to enter space?",
     correctAnswer:"Yuri Alekseyevich Gagarin",
-    choices: [
-      "Neil Alden Armstrong",
-      "Yuri Alekseyevich Gagarin", //(CORRECT)
-      "Edwin Eugene Aldrin Jr.",
-      "Alan Barlett Shepard Jr."
-    ]
+    choices: [ "Neil Alden Armstrong", "Yuri Alekseyevich Gagarin",
+     "Edwin Eugene Aldrin Jr.", "Alan Barlett Shepard Jr." ]
   },
   {
     question: "What was the first animal to be launched into space?",
     correctAnswer: "A Rhesus monkey",
-    choices: [
-      "A Rhesus monkey", //(CORRECT)
-      "A Dog",
-      "A Chimpanzee",
-      "A Cat"
-    ]
+    choices: ["A Rhesus monkey", "A Dog", "A Chimpanzee", "A Cat" ]
   },
   {
     question: "Who was the first man on the moon?",
     correctAnswer: "Neil Armstrong",
-    choices: [
-      "Buzz Alrin",
-      "Neil Armstrong", //(CORRECT)
-      "John Glenn",
-      "Alan Shepard"
-    ]
+    choices: [ "Buzz Alrin", "Neil Armstrong", "John Glenn", "Alan Shepard" ]
   },
   {
     question: "First American Astronaut to enter orbit?",
     correctAnswer: "John Herschel Glenn Jr.",
-    choices: [
-      "John Herschel Glenn Jr.", //CORRECT
-      "Neil A. Armstrong",
-      "Alan B. Shepard",
-      "Dr. Rendezvous"
-    ]
+    choices: ["John Herschel Glenn Jr.", "Neil A. Armstrong",
+    "Alan B. Shepard", "Dr. Rendezvous" ]
   },
   {
     question: "What is the most expensive US Space program mission?",
     correctAnswer: "Space Shuttle Program",
-    choices: [
-      "SLS and Orion",
-      "International Space Station",
-      "Space Shuttle Program", //CORRECT
-      "Apollo Space Program"
-    ]
+    choices: [ "SLS and Orion", "International Space Station",
+      "Space Shuttle Program", "Apollo Space Program" ]
   },
   {
     question: "How many Spacecraft have left the Solar System?",
     correctAnswer: "2",
-    choices: [
-      "2", //CORRECT
-      "1",
-      "3",
-      "4"
-    ]
+    choices: [ "2", "1", "3", "4" ]
   },
   {
     question: "What year did the United States Place a man into Orbit?",
     correctAnswer: "1962",
-    choices: [
-      "1959",
-      "1962", //CORRECT
-      "1963",
-      "1961"
-    ]
+    choices: [ "1959", "1962", "1963", "1961" ]
   },
   {
     question: "What was the First Satellite in Orbit of the Earth?",
     correctAnswer: "Sputnik I",
-    choices: [
-      "Soyuz",
-      "Mir",
-      "Explorer 1",
-      "Sputnik I" //CORRECT
-    ]
+    choices: [ "Soyuz", "Mir", "Explorer 1", "Sputnik I" ]
   }
-];
-//----------------------------------Function creation--------------------------------------
+];//----------------------------------Function creation--------------------------------------
 function myTimer() {
   count = 90;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
@@ -105,25 +67,20 @@ function myTimer() {
   }
 }
 function callToPlaceQuestionOnPage() {//function to display questions and answers to screen after start button clicked
-  for (
-    var myCurrentQuestionIndex = 0;
-    myCurrentQuestionIndex < questionsObject.length;
-    myCurrentQuestionIndex++
-  ) {
+  for ( var myCurrentQuestionIndex = 0;
+    myCurrentQuestionIndex < questionsObject.length; myCurrentQuestionIndex++ ) {
     var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questions thats in the index of array
-    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual ??s
-    var questionHeaders = $("<h2>"); //builds headings for questions
-    let theQuestionId = "question" + myCurrentQuestionIndex;
+    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual QuestionsText??s
+    var questionHeaders = $("<h2>"); //builds heading elements for questions
+    var theQuestionId = "question" + myCurrentQuestionIndex;
     var choices = myCurrentQuestion.choices;
     questionHeaders.attr("class","myQuestions");
     questionHeaders.attr("id",theQuestionId);
     $("#gamebox").append(questionHeaders);
     $(questionHeaders).html(questiontext);
-    for (
-      let theCurrentChoiceIndex = 0;
-      theCurrentChoiceIndex < choices.length;
-      theCurrentChoiceIndex++
-    ) {
+
+   for ( let theCurrentChoiceIndex = 0;
+     theCurrentChoiceIndex < choices.length; theCurrentChoiceIndex++) {
       var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
       var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
@@ -140,95 +97,21 @@ function callToPlaceQuestionOnPage() {//function to display questions and answer
   }
 }
 function checkAnswerRadioValues(){
-    let correctResult0 = questionsObject[0].correctAnswer;
-    let correctResult1 = questionsObject[1].correctAnswer;
-    let correctResult2 = questionsObject[2].correctAnswer;
-    let correctResult3 = questionsObject[3].correctAnswer;
-    let correctResult4 = questionsObject[4].correctAnswer;
-    let correctResult5 = questionsObject[5].correctAnswer;
-    let correctResult6 = questionsObject[6].correctAnswer;
-    let correctResult7 = questionsObject[7].correctAnswer;
-    let qAnswerResult0  = $( "input[type=radio][name=0]:checked" ).val();
-    let qAnswerResult1  = $( "input[type=radio][name=1]:checked" ).val();
-    let qAnswerResult2  = $( "input[type=radio][name=2]:checked" ).val();
-    let qAnswerResult3  = $( "input[type=radio][name=3]:checked" ).val();
-    let qAnswerResult4  = $( "input[type=radio][name=4]:checked" ).val();
-    let qAnswerResult5  = $( "input[type=radio][name=5]:checked" ).val();
-    let qAnswerResult6  = $( "input[type=radio][name=6]:checked" ).val();
-    let qAnswerResult7  = $( "input[type=radio][name=7]:checked" ).val();
-    //clearly could of done this alot neater but if it works it works ¯\_(ツ)_/¯ Sorry guys :D 
-    if ( qAnswerResult0 === correctResult0 ){
-        userCorrectPicks=1;
-    }
-    else if (qAnswerResult0==undefined){
-        noAnswer=1;
-    }
-    else{
-        userWrongAnswer=1;
-    }
-    if ( qAnswerResult1 === correctResult1 ){
+  var answerResultInput = [//handle to grab the values of user input for answers
+    $("input[type=radio][name=0]:checked").val(), $("input[type=radio][name=1]:checked").val(),
+    $("input[type=radio][name=2]:checked").val(), $("input[type=radio][name=3]:checked").val(),
+    $("input[type=radio][name=4]:checked").val(), $("input[type=radio][name=5]:checked").val(),
+    $("input[type=radio][name=6]:checked").val(), $("input[type=radio][name=7]:checked").val() ]
+    for ( let i = 0 ; i < 8 ; i++ ) {
+      //for loop to check results
+      if ( answerResultInput[i] === questionsObject[i].correctAnswer ) {
         userCorrectPicks++;
-    }
-    else if(qAnswerResult1==undefined){
-        noAnswer++;
-    }
-    else{
+       } else if ( answerResultInput[i] == undefined ) {
+       noAnswer++;
+       } else {
         userWrongAnswer++;
-    }
-    if ( qAnswerResult2 === correctResult2 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult2==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
-    if ( qAnswerResult3 === correctResult3 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult3==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
-    if ( qAnswerResult4 === correctResult4 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult4==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
-    if ( qAnswerResult5 === correctResult5 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult5==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
-    if ( qAnswerResult6 === correctResult6 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult6==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
-    if ( qAnswerResult7 === correctResult7 ){
-        userCorrectPicks++;
-    }
-    else if(qAnswerResult7==undefined){
-        noAnswer++;
-    }
-    else{
-        userWrongAnswer++;
-    }
+      }
+    }//DOM push to place answer text 
     $("#correctAnswered").text(userCorrectPicks);
     $("#wrongAnswered").text(userWrongAnswer);
     $("#notAnswered").text(noAnswer);
@@ -245,9 +128,9 @@ function endGameGenerateResults() {
   $("#bottomTimerMessage").html("");
   $("#userMessage").text("Check above for the results!")
   gameOverHideGameBox(); //hides questions and answers after storing results
-}
-//----------------------------Document Ready--------------------------------------
+}//----------------------------Document Ready--------------------------------------
 $(document).ready(function() {
+  //Start button click event
   $("#startBtn").on("click", function() {
     $("#timer").html("START!!!");
     myTimer();
@@ -256,7 +139,7 @@ $(document).ready(function() {
     $("#resultbox").removeAttr("style","visibility");
     $("#resultbox").hide();
     callToPlaceQuestionOnPage();//On start button click Call function to display questions and answers
-  });
+  });//End button click event
   $("#endGameBtn").on("click", function() {
     endGameGenerateResults();
   });
