@@ -1,14 +1,12 @@
 /*eslint-env browser*/
 /*global $*/
-//-------------------------Start of Space Trivia Game Javascript----------------------------
-//Link to live file https://vincent440.github.io/TriviaGame/
-//------------------------------GLOBAL VARIABLE DECLARATION---------------------------------
+//-------------------------Start of Space Trivia Game Javascript Link to live file https://vincent440.github.io/TriviaGame/ ----------------------------
 var userCorrectPicks=0, //-answersCorrect
   userWrongAnswer=0, //-answersWrong
   noAnswer = 0, //-answersNotChecked
-  counter,
-  count; //a Question array , with Objects for each question with answer arrays.
-var questionsObject = [
+  counter, 
+  count, //a Question array , with Objects for each question with answer arrays.
+ questionsObject = [
   {
     question: "Who was the first human to enter space?",
     correctAnswer:"Yuri Alekseyevich Gagarin",
@@ -52,7 +50,7 @@ var questionsObject = [
     correctAnswer: "Sputnik I",
     choices: [ "Soyuz", "Mir", "Explorer 1", "Sputnik I" ]
   }
-];//----------------------------------Function creation--------------------------------------
+];
 function myTimer() {
   count = 90;
   counter = setInterval(timer, 1000); //1000 will  run it every 1 second
@@ -74,25 +72,24 @@ function callToPlaceQuestionOnPage() {//function to display questions and answer
     var questionHeaders = $("<h2>"); //builds heading elements for questions
     var theQuestionId = "question" + myCurrentQuestionIndex;
     var choices = myCurrentQuestion.choices;
-    questionHeaders.attr("class","myQuestions");
-    questionHeaders.attr("id",theQuestionId);
+    questionHeaders.attr("class","myQuestions")
+    .attr("id",theQuestionId);
     $("#gamebox").append(questionHeaders);
     $(questionHeaders).html(questiontext);
-
    for ( let theCurrentChoiceIndex = 0;
      theCurrentChoiceIndex < choices.length; theCurrentChoiceIndex++) {
       var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
       var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
       var theAnswerId = myCurrentQuestionIndex+ "ansID" +theCurrentChoiceIndex;
-      createRadio.attr("id",theAnswerId);
-      createRadio.attr("name", myCurrentQuestionIndex);
+      createRadio.attr("id",theAnswerId)
+      .attr("name", myCurrentQuestionIndex);
       var createLabels = $("<label>"+choiceOptions+"</label>");
-      createLabels.attr("for",theAnswerId);
-      createLabels.attr("class","myAnswerRadios btn btn-success");//radio and input labels
-      $("#gamebox").append(createLabels);
-      $("#gamebox").append(createRadio);
-      $("#gamebox").append("<br>");
+      createLabels.attr("for",theAnswerId)
+      .attr("class","myAnswerRadios btn btn-success");//radio and input labels
+      $("#gamebox").append(createLabels)
+      .append(createRadio)
+      .append("<br>");
     }
   }
 }
@@ -101,9 +98,8 @@ function checkAnswerRadioValues(){
     $("input[type=radio][name=0]:checked").val(), $("input[type=radio][name=1]:checked").val(),
     $("input[type=radio][name=2]:checked").val(), $("input[type=radio][name=3]:checked").val(),
     $("input[type=radio][name=4]:checked").val(), $("input[type=radio][name=5]:checked").val(),
-    $("input[type=radio][name=6]:checked").val(), $("input[type=radio][name=7]:checked").val() ]
+    $("input[type=radio][name=6]:checked").val(), $("input[type=radio][name=7]:checked").val() ];
     for ( let i = 0 ; i < 8 ; i++ ) {
-      //for loop to check results
       if ( answerResultInput[i] === questionsObject[i].correctAnswer ) {
         userCorrectPicks++;
        } else if ( answerResultInput[i] == undefined ) {
@@ -128,16 +124,15 @@ function endGameGenerateResults() {
   $("#bottomTimerMessage").html("");
   $("#userMessage").text("Check above for the results!")
   gameOverHideGameBox(); //hides questions and answers after storing results
-}//----------------------------Document Ready--------------------------------------
+}
 $(document).ready(function() {
-  //Start button click event
   $("#startBtn").on("click", function() {
     $("#timer").html("START!!!");
     myTimer();
     $("#startBtn").hide();
     $("#endGameBtn").show();
-    $("#resultbox").removeAttr("style","visibility");
-    $("#resultbox").hide();
+    $("#resultbox").removeAttr("style","visibility")
+    .hide();
     callToPlaceQuestionOnPage();//On start button click Call function to display questions and answers
   });//End button click event
   $("#endGameBtn").on("click", function() {
