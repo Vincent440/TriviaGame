@@ -6,7 +6,7 @@ var userCorrectPicks=0, //-answersCorrect
   noAnswer = 0, //-answersNotChecked
   counter, 
   count, //a Question array , with Objects for each question with answer arrays.
- questionsObject = [
+ qObject = [
   {
     question: "Who was the first human to enter space?",
     correctAnswer:"Yuri Alekseyevich Gagarin",
@@ -65,27 +65,27 @@ function myTimer() {
   }
 }
 function callToPlaceQuestionOnPage() {//function to display questions and answers to screen after start button clicked
-  for ( var myCurrentQuestionIndex = 0;
-    myCurrentQuestionIndex < questionsObject.length; myCurrentQuestionIndex++ ) {
-    var myCurrentQuestion = questionsObject[myCurrentQuestionIndex]; //Places handle to current Questions thats in the index of array
-    var questiontext = myCurrentQuestion.question; //gives me a handle on the individual QuestionsText??s
-    var questionHeaders = $("<h2>"); //builds heading elements for questions
-    var theQuestionId = "question" + myCurrentQuestionIndex;
-    var choices = myCurrentQuestion.choices;
-    questionHeaders.attr("class","myQuestions")
+  for ( var qIndex = 0;
+    qIndex < qObject.length; qIndex++ ) {
+    var thisQuestion = qObject[qIndex]; //Places handle to current Questions thats in the index of array
+    var qtext = thisQuestion.question; //gives me a handle on the individual QuestionsText??s
+    var qHeader = $("<h2>"); //builds heading elements for questions
+    var theQuestionId = "question" + qIndex;
+    var choices = thisQuestion.choices;
+    qHeader.attr("class","myQuestions")
     .attr("id",theQuestionId);
-    $("#gamebox").append(questionHeaders);
-    $(questionHeaders).html(questiontext);
-   for ( let theCurrentChoiceIndex = 0;
-     theCurrentChoiceIndex < choices.length; theCurrentChoiceIndex++) {
-      var choiceOptions = choices[theCurrentChoiceIndex]; //handle to grab the specific answer
+    $("#gamebox").append(qHeader);
+    $(qHeader).html(qtext);
+   for ( let aIndex = 0;
+     aIndex < choices.length; aIndex++) {
+      var choiceOptions = choices[aIndex]; //handle to grab the specific answer
       var createRadio = $("<input type='radio'/>");//need to fix IDS FOR ANSWERS!!!
       createRadio.attr("value", choiceOptions);
-      var theAnswerId = myCurrentQuestionIndex+ "ansID" +theCurrentChoiceIndex;
-      createRadio.attr("id",theAnswerId)
-      .attr("name", myCurrentQuestionIndex);
+      var answerId = qIndex+ "ansID" +aIndex;
+      createRadio.attr("id",answerId)
+      .attr("name", qIndex);
       var createLabels = $("<label>"+choiceOptions+"</label>");
-      createLabels.attr("for",theAnswerId)
+      createLabels.attr("for",answerId)
       .attr("class","myAnswerRadios btn btn-success");//radio and input labels
       $("#gamebox").append(createLabels)
       .append(createRadio)
@@ -100,7 +100,7 @@ function checkAnswerRadioValues(){
     $("input[type=radio][name=4]:checked").val(), $("input[type=radio][name=5]:checked").val(),
     $("input[type=radio][name=6]:checked").val(), $("input[type=radio][name=7]:checked").val() ];
     for ( let i = 0 ; i < 8 ; i++ ) {
-      if ( answerResultInput[i] === questionsObject[i].correctAnswer ) {
+      if ( answerResultInput[i] === qObject[i].correctAnswer ) {
         userCorrectPicks++;
        } else if ( answerResultInput[i] == undefined ) {
        noAnswer++;
@@ -125,8 +125,8 @@ function endGameGenerateResults() {
   $("#userMessage").text("Check above for the results!")
   gameOverHideGameBox(); //hides questions and answers after storing results
 }
-$(document).ready(function() {
-  $("#startBtn").on("click", function() {
+$(document).ready(()=> {
+  $("#startBtn").on("click", ()=> {
     $("#timer").html("START!!!");
     myTimer();
     $("#startBtn").hide();
@@ -135,7 +135,7 @@ $(document).ready(function() {
     .hide();
     callToPlaceQuestionOnPage();//On start button click Call function to display questions and answers
   });//End button click event
-  $("#endGameBtn").on("click", function() {
+  $("#endGameBtn").on("click", ()=> {
     endGameGenerateResults();
   });
 });
