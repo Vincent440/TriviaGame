@@ -1,7 +1,6 @@
-# Vince's Space TriviaGame
+# Vince's Space Trivia Game
 
-A trivia question game with Javascript for the logic, jQuery for the DOM manipulation.  
-styled around the solar system and space questions Enjoy! 
+A timed trivia question game based on space, created using JavaScript with jQuery. Enjoy! 
 
 [Click here to play!](https://vincent440.github.io/TriviaGame/)
 
