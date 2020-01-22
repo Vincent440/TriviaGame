@@ -17,9 +17,12 @@
   <body>
     <div class="container">
       <div class="row text-center">
-        <div class="col-12 ">
+        <div class="col-12">
           <h1 id="gameTitle">Vince's Space Trivia</h1>
-          <h1 id="timerBox">Timer: <span class="badge badge-secondary"  id="timer"></span></h1>
+            <div class="border-bottom mb-2" id="timerBox">
+              <h1 class="d-inline">Timer: </h1>
+              <span class="badge badge-dark"  id="timer"></span>
+            </div>
         </div>
       </div>
 
@@ -29,17 +32,29 @@
             <form id="gamebox"></form>
           </div>
           <div id="resultbox" style="visibility:hidden">
-            <h1 id="header1">Correct: <span id="correctAnswered">0</span></h1>
-            <h1 id="header2">Wrong Answers: <span id="wrongAnswered">0</span></h1>
-            <h1 id="header3">Not Answered: <span id="notAnswered">8</span></h1>
+            <div class="row justify-content-center">
+              <div class="col-sm-9">
+                <div class="alert alert-success">Correct: <span class="badge badge-success" id="correctAnswered">0</span></div>
+                <div class="alert alert-danger">Wrong Answers: <span class="badge badge-danger" id="wrongAnswered">0</span class="badge badge-success"></div>
+                <div class="alert alert-secondary">Not Answered: <span class="badge badge-secondary" id="notAnswered">8</span class="badge badge-success"></div>
+              </div>
+            </div>
             <p id="userMessage"></p>
+            <div class="btn-group">
+              <button class="btn btn-success" type="button" onclick="location.reload()">Play Again</button>
+              <a class="btn btn-secondary" href="https://github.com/Vincent440/timed-trivia-game">Github Repo</a>
+              <a class="btn btn-secondary" href="https://vincent440.github.io">Portfolio</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="row text-center">
         <div class="col-12 ">
-          <h6 id="bottomTimerMessage"><p>You have <span class="badge badge-secondary"  id="timer2"></span> to answer all the quesions! Press the button to submit your answers when you are done!</p></h6>
+          <h6 id="bottomTimerMessage"><p>You have 
+            <span class="badge badge-secondary"  id="timer2"></span>
+            to answer all the quesions! Press the button to submit your answers when you are done!</p>
+          </h6>
           <button
             id="endGameBtn"
             type="button"

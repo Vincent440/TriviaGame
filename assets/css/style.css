@@ -1,6 +1,7 @@
 #gameTitle {
-  color: red;
-  background-color: blue;
+  color: rgb(255, 255, 255);
+  background-color: rgb(65, 0, 0);
+  padding: 20px 10px 20px 10px;
 }
 body {
   background-image: url("../images/earth_moon.jpg");
@@ -9,14 +10,18 @@ body {
   background-position: center;
   background-size: cover;
 }
+#timerBox {
+  font-weight: bold;
+}
 #timer {
     font-size: 30px;
     color:white;
+    border:solid;
 }
 .container {
-  background-color: darkgrey;
-  opacity: 0.9;
-  padding:0% 0% 10% 0% ;
+  background-color: rgba(102, 26, 26, 0.911);
+  padding:0% 0% 2% 0% ;
+  color:white;
 }
 .myQuestions {
     font-size: 28px;
@@ -24,13 +29,4 @@ body {
 .myAnswerRadios {
   padding: 5px;
   opacity: 1;
-}
-#header1{
-  color:rgb(2, 122, 8);
-}
-#header2{
-  color:crimson;
-}
-#header3{
-  color:rgb(26, 26, 209);
 }
