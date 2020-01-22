@@ -4,9 +4,9 @@
   padding: 20px 10px 20px 10px;
 }
 body {
-  background-image: url("../images/earth_moon.jpg");
+  background-image: url("../images/NGC_6752_Hubble_WikiSky.jpg");
   background-repeat: no-repeat;
-  background-attachment: inherit;
+  background-attachment: fixed;
   background-position: center;
   background-size: cover;
 }
