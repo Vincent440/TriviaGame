@@ -2,7 +2,7 @@
 
 A timed trivia question game based on space, created using JavaScript with jQuery. Enjoy! 
 
-[Click here to play!](https://vincent440.github.io/TriviaGame/)
+[Click here to play!](https://vincent440.github.io/timed-trivia-game/)
 
 
 You have four choices to 8 questions,
